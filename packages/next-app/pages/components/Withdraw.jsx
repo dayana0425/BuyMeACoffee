@@ -52,7 +52,7 @@ export default function Withdraw() {
     signerOrProvider: signer.data,
   });
 
-  async function withdrawFunds() {
+  const withdrawFunds = async () => {
     try {
       setSuccess(false)
       setLoading(false)

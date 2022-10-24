@@ -58,7 +58,7 @@ export default function SubmitDonation() {
     signerOrProvider: signer.data,
   });
 
-  async function buyACoffee(coffee) {
+  const buyACoffee = async (coffee) => {
     try {
       setSuccess(false)
       setLoading(false)

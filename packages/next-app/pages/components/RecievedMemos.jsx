@@ -86,8 +86,7 @@ import contractABI from '../../contracts/ABI/BuyMeCoffee.json';
     );
   }
   
-  
-  export default function GridBlurredBackdrop() {
+  export default function RecievedMemos() {
     const { isConnected } = useAccount();
     const [memos, setMemos] = useState(null);
     const signer = useSigner();
@@ -97,13 +96,13 @@ import contractABI from '../../contracts/ABI/BuyMeCoffee.json';
       signerOrProvider: signer.data,
     });
 
-  async function getMemos() {
+  const getMemos = async () => {
     try {
       if (contractOnMumbai && isConnected) {        
         console.log("fetching memos from the blockchain..");
-        const memos = contractOnMumbai.getMemos();
+        const res = await contractOnMumbai.getMemos();
         console.log("fetched!");
-        setMemos(memos);
+        setMemos(res);
       } else {
         console.log("Metamask is not connected");
       }
@@ -113,8 +112,10 @@ import contractABI from '../../contracts/ABI/BuyMeCoffee.json';
   };
 
   useEffect(() => {
-    getMemos();
-  }, []);
+      if(isConnected){
+        getMemos();
+      }
+  }, [isConnected, getMemos]);
 
 
     return (

@@ -28,3 +28,9 @@ Below I explain all the features I added to the front-end + what I used to build
 ![Figure 3](images/AllCoffeesRecieved.png)
 * Used this Chakra UI template to display all my memos recieved: https://chakra-templates.dev/templates/page-sections/testimonials/gridBlurredBackdrop
 * Avatar Images are stored on IPFS using Web3Storage. Checkout `packages/next-app/helpers/getRandomImage.js` to see all image URLs.
+* In case you don't have on-chain data yet, you can use the test data in `packages/next-app/utils/testimonials.js`.
+* The backgrounds for each card are in `packages/next-app/utils/backgrounds.js`, the backgrounds are svg. 
+  * If you want to play around with the background, checkout this website: https://www.svgbackgrounds.com/set/free-svg-backgrounds-and-patterns/
+    * Export as inline SVG
+    * Then go here: https://yoksel.github.io/url-encoder/ & paste into 'Insert SVG'
+    * Copy the 'Ready for CSS' URL & add it to the array in `backgrounds.js`

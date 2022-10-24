@@ -57,7 +57,7 @@ export default function Withdraw() {
       setSuccess(false)
       setLoading(false)
       if (contractOnMumbai) {
-        const txn = await contractOnMumbai.withdraw({ gasLimit: 900000 });
+        const txn = await contractOnMumbai.withdrawTips({ gasLimit: 900000 });
         setLoading(true);
         await txn.wait();
         setLoading(false);

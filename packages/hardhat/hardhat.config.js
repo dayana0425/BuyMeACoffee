@@ -1,6 +1,7 @@
 require("@nomiclabs/hardhat-waffle");
 require("hardhat-abi-exporter");
 require("dotenv").config();
+require("@nomiclabs/hardhat-etherscan");
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   const accounts = await hre.ethers.getSigners();
@@ -36,6 +37,8 @@ module.exports = {
     pretty: false,
   },
   etherscan: {
-    api: process.env.POLYGONSCAN_KEY,
-  },
+    apiKey: {
+      polygonMumbai: process.env.POLYGONSCAN_KEY
+    }
+  }
 };

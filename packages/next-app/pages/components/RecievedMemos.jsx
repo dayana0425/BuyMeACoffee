@@ -101,7 +101,7 @@ import contractABI from '../../contracts/ABI/BuyMeCoffee.json';
     try {
       if (contractOnMumbai && isConnected) {        
         console.log("fetching memos from the blockchain..");
-        const memos = await contractOnMumbai.getMemos();
+        const memos = contractOnMumbai.getMemos();
         console.log("fetched!");
         setMemos(memos);
       } else {

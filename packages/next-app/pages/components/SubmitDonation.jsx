@@ -19,12 +19,15 @@ import { useContract, useSigner } from 'wagmi';
 // Address + ABI 
 import { contractAddress } from '../../utils/contractAddress.js';
 import contractABI from '../../contracts/ABI/BuyMeCoffee.json';
-
+// Ethers
+import { ethers } from "ethers";
 
 export default function SubmitDonation() {
   const toast = useToast();
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(null);
+  const [name, setName] = useState(null);
+  const [memo, setMemo] = useState(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     if(success) {
@@ -55,12 +58,19 @@ export default function SubmitDonation() {
     signerOrProvider: signer.data,
   });
 
-  async function handleSubmit(e) {
+  async function buyACoffee(coffee) {
     try {
       setSuccess(false)
       setLoading(false)
       if (contractOnMumbai) {
-        const txn = await contractOnMumbai.buyCoffee("", "", { gasLimit: 900000 });
+        let deposit;
+        if(coffee) { // true
+          deposit = ethers.utils.parseEther("0.001");
+        }
+        else { // false
+          deposit = ethers.utils.parseEther("0.01");
+        }
+        const txn = await contractOnMumbai.buyCoffee(name, memo, { value: deposit, gasLimit: 900000 });
         setLoading(true);
         await txn.wait();
         setLoading(false);
@@ -77,9 +87,6 @@ export default function SubmitDonation() {
     }
   }
 
-  const initialRef = React.useRef(null)
-  const finalRef = React.useRef(null)
-
   return (
     <>
       <Button
@@ -95,8 +102,6 @@ export default function SubmitDonation() {
       </Button>
 
       <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}>
         <ModalOverlay />
@@ -113,31 +118,33 @@ export default function SubmitDonation() {
             </p>
             {/* Q1 */}
             <FormControl>
-              <FormLabel><b>Form</b></FormLabel>
-              <Input ref={initialRef} placeholder='Your Name' />
+              <FormLabel><b>From</b></FormLabel>
+              <Input onChange={(e)=>setName(e.target.value)} placeholder='Your Name' />
             </FormControl>
             {/* Q2 */}
             <FormControl mt={4}>
               <FormLabel><b>Memo</b></FormLabel>
-              <Input placeholder='Type a Short Message' />
+              <Input onChange={(e)=>setMemo(e.target.value)} placeholder='Type a Short Message' />
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            {/* Donate */}
+            {/* Donate Coffee */}
             <Button 
               colorScheme={'pink'}
               bg={'pink.300'} 
               mr={3}
+              onClick={()=>buyACoffee(true)}
               _hover={{
                 bg: 'pink.500',
             }}>
               Send Coffee
             </Button>
-            {/* Donate */}
+            {/* Donate Large Coffee*/}
             <Button 
               colorScheme={'pink'}
               bg={'pink.300'} 
               mr={3}
+              onClick={()=>buyACoffee(false)}
               _hover={{
                 bg: 'pink.500',
             }}>

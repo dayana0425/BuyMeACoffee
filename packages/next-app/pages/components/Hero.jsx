@@ -4,14 +4,13 @@ import {
   Heading,
   Container,
   Text,
-  Button,
   Stack,
   Icon,
   useColorModeValue,
   createIcon,
-  useDisclosure,
 } from '@chakra-ui/react';
 import SubmitDonation from "./SubmitDonation";
+import Withdraw from "./Withdraw";
 
 export default function Hero() {
   return (
@@ -41,6 +40,7 @@ export default function Hero() {
             alignSelf={'center'}
             position={'relative'}>
             <SubmitDonation></SubmitDonation>
+            <Withdraw></Withdraw>
             <Box>
               <Icon
                 as={Arrow}

@@ -16,8 +16,6 @@ import { useContract, useSigner } from 'wagmi';
 // Address + ABI 
 import { contractAddress } from '../../utils/contractAddress.js';
 import contractABI from '../../contracts/ABI/BuyMeCoffee.json';
-// Ethers
-import { ethers } from "ethers";
 
 export default function Withdraw() {
   const toast = useToast();
@@ -54,7 +52,7 @@ export default function Withdraw() {
     signerOrProvider: signer.data,
   });
 
-  async function withdrawFunds() {
+  const withdrawFunds = async () => {
     try {
       setSuccess(false)
       setLoading(false)
@@ -99,7 +97,7 @@ export default function Withdraw() {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <p>
-              <b>Warning:</b> Only the owner can withdraw earnings. If you're not the owner the transaction will fail!
+              <b>Warning:</b> Only the owner can withdraw earnings. If you&apos;re not the owner the transaction will fail!
               <br></br>
               <br></br>
             </p>

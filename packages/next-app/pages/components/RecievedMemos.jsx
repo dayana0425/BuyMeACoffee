@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, memo } from "react";
 import {
     Avatar,
     Box,
@@ -7,11 +7,16 @@ import {
     SimpleGrid,
     useColorModeValue,
   } from '@chakra-ui/react';
-import { testimonials } from "../../utils/testimonials";
+// utils
 import { backgrounds } from "../../utils/backgrounds"
-  
-  function TestimonialCard(cardInfo) {
-    console.log(cardInfo)
+import { images } from "../../utils/images"
+// Wagmi 
+import { useContract, useSigner, useAccount } from 'wagmi';
+// Address + ABI 
+import { contractAddress } from '../../utils/contractAddress.js';
+import contractABI from '../../contracts/ABI/BuyMeCoffee.json';
+
+  function TestimonialCard(memoInfo) {
     return (
       <Flex
         boxShadow={'lg'}
@@ -46,7 +51,7 @@ import { backgrounds } from "../../utils/backgrounds"
           backgroundSize: 'cover',
           top: 0,
           left: 0,
-          backgroundImage: backgrounds[cardInfo.index % 4],
+          backgroundImage: backgrounds[memoInfo.index % 4],
         }}>
         <Flex
           direction={'column'}
@@ -57,21 +62,21 @@ import { backgrounds } from "../../utils/backgrounds"
             fontWeight={'medium'}
             fontSize={'15px'}
             pb={4}>
-            {cardInfo.message}
+            {memoInfo.message}
           </chakra.p>
           <chakra.p fontFamily={'Work Sans'} fontWeight={'bold'} fontSize={14}>
-            {cardInfo.name}
+            {memoInfo.name}
             <chakra.span
               fontFamily={'Inter'}
               fontWeight={'medium'}
               color={'gray.500'}>
               {' '}
-              - {cardInfo.address}
+              - {memoInfo.from}
             </chakra.span>
           </chakra.p>
         </Flex>
         <Avatar
-          src={cardInfo.avatar}
+          src={images[memoInfo.index % 7]}
           height={'80px'}
           width={'80px'}
           alignSelf={'center'}
@@ -81,7 +86,38 @@ import { backgrounds } from "../../utils/backgrounds"
     );
   }
   
-  export default function GridBlurredBackdrop() {
+  export default function RecievedMemos() {
+    const { isConnected } = useAccount();
+    const [memos, setMemos] = useState(null);
+    const signer = useSigner();
+    const contractOnMumbai = useContract({
+      addressOrName: contractAddress,
+      contractInterface: contractABI,
+      signerOrProvider: signer.data,
+    });
+
+  const getMemos = async () => {
+    try {
+      if (contractOnMumbai && isConnected) {        
+        console.log("fetching memos from the blockchain..");
+        const res = await contractOnMumbai.getMemos();
+        console.log("fetched!");
+        setMemos(res);
+      } else {
+        console.log("Metamask is not connected");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+      if(isConnected){
+        getMemos();
+      }
+  }, [isConnected, getMemos]);
+
+
     return (
       <Flex
         textAlign={'center'}
@@ -104,8 +140,8 @@ import { backgrounds } from "../../utils/backgrounds"
             spacing={'20'}
             mt={16}
             mx={'auto'}>
-        {testimonials.map((cardInfo, index) => (
-          <TestimonialCard {...cardInfo} key={index} index={index}/>
+        {memos && memos.map((memoInfo, index) => (
+          <TestimonialCard {...memoInfo} key={index} index={index}/>
         ))}
         </SimpleGrid>
       </Flex>

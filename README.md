@@ -1,4 +1,4 @@
-# Buy Me Coffee DApp
+# Buy Me A Coffee DApp
 
 A DApp that let's others send me coffee with crypto! ☕️
 * View verified smart contract on Mumbai: https://mumbai.polygonscan.com/address/0xD9eA50f537bDc8A5c3cFBD5dfef04Dea846212d5#code

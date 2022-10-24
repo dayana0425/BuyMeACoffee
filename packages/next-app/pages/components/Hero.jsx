@@ -9,7 +9,9 @@ import {
   Icon,
   useColorModeValue,
   createIcon,
+  useDisclosure,
 } from '@chakra-ui/react';
+import SubmitDonation from "./SubmitDonation";
 
 export default function Hero() {
   return (
@@ -30,7 +32,7 @@ export default function Hero() {
             </Text>
           </Heading>
           <Text>
-            Support me in my Blockchain journey 🚀
+            Help fuel my Blockchain journey with coffee 🚀
           </Text>
           <Stack
             direction={'column'}
@@ -38,16 +40,7 @@ export default function Hero() {
             align={'center'}
             alignSelf={'center'}
             position={'relative'}>
-            <Button
-              colorScheme={'pink'}
-              bg={'pink.300'}
-              rounded={'full'}
-              px={6}
-              _hover={{
-                bg: 'green.500',
-              }}>
-              Donate
-            </Button>
+            <SubmitDonation></SubmitDonation>
             <Box>
               <Icon
                 as={Arrow}
@@ -55,16 +48,16 @@ export default function Hero() {
                 w={71}
                 position={'absolute'}
                 right={-71}
-                top={'10px'}
+                top={'15px'}
               />
               <Text
                 fontSize={'lg'}
                 fontFamily={'Caveat'}
                 position={'absolute'}
-                right={'-150px'}
-                top={'-20px'}
+                right={'-120px'}
+                top={'-10px'}
                 transform={'rotate(20deg)'}>
-                5 MATIC = 1 Coffee
+                Thank you!
               </Text>
             </Box>
           </Stack>

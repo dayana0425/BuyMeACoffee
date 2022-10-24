@@ -100,7 +100,7 @@ export default function SubmitDonation() {
         }}>
           Send Coffee
       </Button>
-
+      {/* Modal Form */}
       <Modal
         isOpen={isOpen}
         onClose={onClose}>

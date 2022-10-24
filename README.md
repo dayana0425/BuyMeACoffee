@@ -18,7 +18,13 @@ Below I explain all the features I added to the front-end + what I used to build
 * Used the Chakra UI Modal & Form Components to create this "Form Modal"
   * Modal: https://chakra-ui.com/docs/components/modal/usage
   * Form: https://chakra-ui.com/docs/components/form-control/usage
+* Using Chakra UI + Tailwind CSS has definately made front-end development a faster process, I recommend. 👍
 * Added two options for sending coffee: Regular or Large using Chakra UI's Button Component
 * Utilized wagmi React Hooks to send transactions. 
   * useContract() https://wagmi.sh/docs/hooks/useContract
     * This react hook allowed me to connect to my smart-contract & to trigger transactions. 
+
+### All Coffees Recieved
+![Figure 3](images/AllCoffeesRecieved.png)
+* Used this Chakra UI template to display all my memos recieved: https://chakra-templates.dev/templates/page-sections/testimonials/gridBlurredBackdrop
+* Avatar Images are stored on IPFS using Web3Storage. Checkout `packages/next-app/helpers/getRandomImage.js` to see all image URLs.

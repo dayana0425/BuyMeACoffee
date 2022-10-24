@@ -1,0 +1,30 @@
+{
+  "name": "@hola-mundo-dapp/next-app",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-config-next": "^12.1.6"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.0",
+    "@chakra-ui/react": "^2.2.4",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
+    "@rainbow-me/rainbowkit": "^0.4.5",
+    "ethers": "^5.6.9",
+    "framer-motion": "^6",
+    "next": "^12.1.6",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-icons": "^4.4.0",
+    "wagmi": "^0.6.0",
+    "web3.storage": "^4.4.0"
+  }
+}

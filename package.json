@@ -1,0 +1,33 @@
+{
+  "name": "@hola-mundo-dapp/monorepo",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "author": "Daiana Bilbao",
+  "keywords": [
+    "ethereum",
+    "next",
+    "hardhat",
+    "rainbow",
+    "polygon",
+    "graph",
+    "monorepo",
+    "yarn",
+    "wagmi",
+    "starter",
+    "boilerplate"
+  ],
+  "scripts": {
+    "build": "yarn workspace @hola-mundo-dapp/next-app build",
+    "start": "yarn workspace @hola-mundo-dapp/next-app start",
+    "dev": "yarn workspace @hola-mundo-dapp/next-app dev",
+    "node": "yarn workspace @hola-mundo-dapp/hardhat chain",
+    "compile": "yarn workspace @hola-mundo-dapp/hardhat compile",
+    "deploy": "yarn workspace @hola-mundo-dapp/hardhat deploy",
+    "buyMeCoffee": "yarn workspace @hola-mundo-dapp/hardhat buyMeCoffee"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {}
+}

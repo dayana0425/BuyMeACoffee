@@ -10,11 +10,11 @@ export const { chains, provider } = configureChains(
   [alchemyProvider({ alchemyId: process.env.ALCHEMY_ID }), publicProvider()]
 );
 const { connectors } = getDefaultWallets({
-  appName: "Hola Mundo DApp",
+  appName: "Buy Me A Coffee",
   chains,
 });
 export const wagmiClient = createClient({
-  autoConnect: true,
+  // autoConnect: true,
   connectors,
   provider,
 });
